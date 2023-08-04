@@ -11,10 +11,10 @@ import Link from 'next/link'
 
 interface HomeProps {
   products: {
-    id: string,
-    name: string,
-    imageUrl: string,
-    price: string
+    id: string;
+    name: string;
+    imageUrl: string;
+    price: string;
   }[]
 }
 
