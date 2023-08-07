@@ -23,18 +23,22 @@ export function ShoppingCart({ isVisible, handleVisibilityChange }: ShoppingCart
         <X size={32} weight="bold" />
       </CloseButton>
       <h1>Sacola de compras</h1>
-      {products.map((product => (
-        <CartItem key={product.id}>
-          <ItemImage>
-            <Image src={product.imageUrl} width={94} height={94} alt="" />
-          </ItemImage>
-          <ItemDetails>
-            <p>{product.name}</p>
-            <span>{product.priceFormatted}</span>
-            <button>Remover</button>
-          </ItemDetails>
-        </CartItem>
-      )))}
+      {products.length ?
+        products.map((product => (
+          <CartItem key={product.id}>
+            <ItemImage>
+              <Image src={product.imageUrl} width={94} height={94} alt="" />
+            </ItemImage>
+            <ItemDetails>
+              <p>{product.name}</p>
+              <span>{product.priceFormatted}</span>
+              <button>Remover</button>
+            </ItemDetails>
+          </CartItem>
+        ))) 
+        :
+        <p>Sua sacola está vazia</p>
+      }
     </ShoppingCartContainer>
   )
 }
