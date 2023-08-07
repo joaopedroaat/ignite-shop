@@ -9,9 +9,16 @@ import Image from 'next/image'
 import { globalStyles } from '@/styles/global'
 globalStyles()
 
+import { ShoppingCart } from '@/components/shoppingCart'
+import { useState } from 'react'
 import { CartProvider } from 'use-shopping-cart'
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [isShoppingCartVisible, setIsShoppingCartVisible] = useState(false)
+  const handleShoppingCartButtonClicked = () => {
+    setIsShoppingCartVisible(!isShoppingCartVisible)
+  }
+
   return (
     <CartProvider
       cartMode="checkout-session"
@@ -24,11 +31,12 @@ export default function App({ Component, pageProps }: AppProps) {
           <Link href='/' prefetch={false} >
             <Image src={logoImg} alt="" />
           </Link>
-          <button>
+          <button onClick={handleShoppingCartButtonClicked}>
             <Handbag size={32} weight='bold' />
           </button>
         </Header>
         <Component {...pageProps} />
+        <ShoppingCart isVisible={isShoppingCartVisible} />
       </Container>
     </CartProvider>
   )
