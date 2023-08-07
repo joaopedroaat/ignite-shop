@@ -11,7 +11,6 @@ globalStyles()
 
 import { ShoppingCart } from '@/components/shoppingCart'
 import { useState } from 'react'
-import { CartProvider } from 'use-shopping-cart'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isShoppingCartVisible, setIsShoppingCartVisible] = useState(false)
@@ -20,24 +19,17 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <CartProvider
-      cartMode="checkout-session"
-      stripe={process.env.STRIPE_PUBLIC_KEY ?? ''}
-      currency="BRL"
-      shouldPersist
-    >
-      <Container>
-        <Header>
-          <Link href='/' prefetch={false} >
-            <Image src={logoImg} alt="" />
-          </Link>
-          <button onClick={handleShoppingCartButtonClicked}>
-            <Handbag size={32} weight='bold' />
-          </button>
-        </Header>
-        <Component {...pageProps} />
-        <ShoppingCart isVisible={isShoppingCartVisible} handleVisibilityChange={handleShoppingCartButtonClicked} />
-      </Container>
-    </CartProvider>
+    <Container>
+      <Header>
+        <Link href='/' prefetch={false} >
+          <Image src={logoImg} alt="" />
+        </Link>
+        <button onClick={handleShoppingCartButtonClicked}>
+          <Handbag size={32} weight='bold' />
+        </button>
+      </Header>
+      <Component {...pageProps} />
+      <ShoppingCart isVisible={isShoppingCartVisible} handleVisibilityChange={handleShoppingCartButtonClicked} />
+    </Container>
   )
 }
