@@ -1,46 +1,35 @@
+import { CartContext } from "@/contexts/cartContext"
 import { stripe } from "@/lib/stripe"
 import { ImageContainer, ProductContainer, ProductDetails } from "@/styles/pages/product"
-import axios from "axios"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Head from "next/head"
 import Image from "next/image"
-import { useState } from "react"
+import { useContext } from "react"
 import Stripe from "stripe"
-
 
 interface ProductProps {
   product: {
     id: string;
     name: string;
     imageUrl: string;
-    price: string;
+    priceFormatted: string;
     description: string;
     defaultPriceId: string;
   }
 }
 
 export default function Product({ product }: ProductProps) {
-  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
+  const { addProduct } = useContext(CartContext)
 
-  async function handleBuyProduct() {
-    try {
-      setIsCreatingCheckoutSession(true)
-
-      const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId
-      })
-
-      const { checkoutUrl } = response.data
-
-      // Para rotas internas utilizar o hook useRouter e aplicar um router.push('path')
-      window.location.href = checkoutUrl
-    } catch (error) {
-      // Conectar com alguma ferramenta de observabilidade (Datadog / Sentry)
-      alert('Falha ao redirecionar ao checkout.')
-      setIsCreatingCheckoutSession(false)
-    }
+  const handleAddProduct = () => {
+    addProduct({
+      id: product.id,
+      name: product.name,
+      imageUrl: product.imageUrl,
+      priceFormatted: product.priceFormatted,
+      defaultPriceId: product.defaultPriceId
+    })
   }
-
 
   return (
     <>
@@ -54,9 +43,9 @@ export default function Product({ product }: ProductProps) {
         </ImageContainer>
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          <span>{product.priceFormatted}</span>
           <p>{product.description}</p>
-          <button onClick={handleBuyProduct} disabled={isCreatingCheckoutSession}>Comprar Agora</button>
+          <button onClick={handleAddProduct}>Colocar na sacola</button>
         </ProductDetails>
       </ProductContainer>
     </>
@@ -87,7 +76,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
         id: product.id,
         name: product.name,
         imageUrl: product.images[0],
-        price: new Intl.NumberFormat('pt-BR', {
+        priceFormatted: new Intl.NumberFormat('pt-BR', {
           style:'currency',
           currency: 'BRL'
         }).format(price.unit_amount! / 100),

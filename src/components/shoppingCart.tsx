@@ -2,7 +2,8 @@ import { CartItem, CloseButton, ItemDetails, ItemImage, ShoppingCartContainer } 
 import { X } from "@phosphor-icons/react";
 import Image from "next/image";
 
-import shirt1 from '@/assets/camisetas/1.png';
+import { CartContext } from "@/contexts/cartContext";
+import { useContext } from "react";
 
 interface ShoppingCartProps {
   isVisible: boolean;
@@ -10,6 +11,8 @@ interface ShoppingCartProps {
 }
 
 export function ShoppingCart({ isVisible, handleVisibilityChange }: ShoppingCartProps) {
+  const { products } = useContext(CartContext)
+
   const handleCloseButtonClicked = () => {
     handleVisibilityChange()
   }
@@ -20,16 +23,18 @@ export function ShoppingCart({ isVisible, handleVisibilityChange }: ShoppingCart
         <X size={32} weight="bold" />
       </CloseButton>
       <h1>Sacola de compras</h1>
-      <CartItem>
-        <ItemImage>
-          <Image src={shirt1} width={94} height={94} alt="" />
-        </ItemImage>
-        <ItemDetails>
-          <p>Camiseta Beyond the Limits</p>
-          <span>R$ 79,90</span>
-          <button>Remover</button>
-        </ItemDetails>
-      </CartItem>
+      {products.map((product => (
+        <CartItem key={product.id}>
+          <ItemImage>
+            <Image src={product.imageUrl} width={94} height={94} alt="" />
+          </ItemImage>
+          <ItemDetails>
+            <p>{product.name}</p>
+            <span>{product.priceFormatted}</span>
+            <button>Remover</button>
+          </ItemDetails>
+        </CartItem>
+      )))}
     </ShoppingCartContainer>
   )
 }

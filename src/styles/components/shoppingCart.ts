@@ -38,6 +38,8 @@ export const CartItem = styled('div', {
   gap: '1.25rem',
 
   width: '100%',
+
+  marginBottom: '2rem'
 })
 
 export const ItemImage = styled('div', {

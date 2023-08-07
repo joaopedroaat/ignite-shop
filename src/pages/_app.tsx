@@ -10,6 +10,7 @@ import { globalStyles } from '@/styles/global'
 globalStyles()
 
 import { ShoppingCart } from '@/components/shoppingCart'
+import { CartContextProvider } from '@/contexts/cartContext'
 import { useState } from 'react'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -19,17 +20,19 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <Container>
-      <Header>
-        <Link href='/' prefetch={false} >
-          <Image src={logoImg} alt="" />
-        </Link>
-        <button onClick={handleShoppingCartButtonClicked}>
-          <Handbag size={32} weight='bold' />
-        </button>
-      </Header>
-      <Component {...pageProps} />
-      <ShoppingCart isVisible={isShoppingCartVisible} handleVisibilityChange={handleShoppingCartButtonClicked} />
-    </Container>
+    <CartContextProvider>
+      <Container>
+        <Header>
+          <Link href='/' prefetch={false} >
+            <Image src={logoImg} alt="" />
+          </Link>
+          <button onClick={handleShoppingCartButtonClicked}>
+            <Handbag size={32} weight='bold' />
+          </button>
+        </Header>
+        <Component {...pageProps} />
+        <ShoppingCart isVisible={isShoppingCartVisible} handleVisibilityChange={handleShoppingCartButtonClicked} />
+      </Container>
+    </CartContextProvider>
   )
 }
