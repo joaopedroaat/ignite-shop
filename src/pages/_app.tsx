@@ -9,18 +9,27 @@ import Image from 'next/image'
 import { globalStyles } from '@/styles/global'
 globalStyles()
 
+import { CartProvider } from 'use-shopping-cart'
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Container>
-      <Header>
-        <Link href='/' prefetch={false} >
-          <Image src={logoImg} alt="" />
-        </Link>
-        <button>
-          <Handbag size={32} weight='bold' />
-        </button>
-      </Header>
-      <Component {...pageProps} />
-    </Container>
+    <CartProvider
+      cartMode="checkout-session"
+      stripe={process.env.STRIPE_PUBLIC_KEY ?? ''}
+      currency="BRL"
+      shouldPersist
+    >
+      <Container>
+        <Header>
+          <Link href='/' prefetch={false} >
+            <Image src={logoImg} alt="" />
+          </Link>
+          <button>
+            <Handbag size={32} weight='bold' />
+          </button>
+        </Header>
+        <Component {...pageProps} />
+      </Container>
+    </CartProvider>
   )
 }
