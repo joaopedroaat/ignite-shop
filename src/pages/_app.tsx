@@ -36,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </button>
         </Header>
         <Component {...pageProps} />
-        <ShoppingCart isVisible={isShoppingCartVisible} />
+        <ShoppingCart isVisible={isShoppingCartVisible} handleVisibilityChange={handleShoppingCartButtonClicked} />
       </Container>
     </CartProvider>
   )
