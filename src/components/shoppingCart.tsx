@@ -11,10 +11,14 @@ interface ShoppingCartProps {
 }
 
 export function ShoppingCart({ isVisible, handleVisibilityChange }: ShoppingCartProps) {
-  const { products } = useContext(CartContext)
+  const { products, removeProduct } = useContext(CartContext)
 
   const handleCloseButtonClicked = () => {
     handleVisibilityChange()
+  }
+
+  const handleRemoveProduct = (productId: string) => {
+    removeProduct(productId)
   }
 
   return isVisible && (
@@ -32,7 +36,7 @@ export function ShoppingCart({ isVisible, handleVisibilityChange }: ShoppingCart
             <ItemDetails>
               <p>{product.name}</p>
               <span>{product.priceFormatted}</span>
-              <button>Remover</button>
+              <button onClick={() => handleRemoveProduct(product.id)}>Remover</button>
             </ItemDetails>
           </CartItem>
         ))) 

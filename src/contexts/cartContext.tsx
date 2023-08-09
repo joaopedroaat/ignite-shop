@@ -9,8 +9,9 @@ export interface CartItem {
 }
 
 interface CartContextType {
-  products: CartItem[],
+  products: CartItem[]
   addProduct: (newProduct: CartItem) => void
+  removeProduct: (productId: string) => void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -29,11 +30,16 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       setProducts((prevProducts) => [...prevProducts, newProduct])
   }
 
+  const removeProduct = (productId: string) => {
+    setProducts((prevProducts => prevProducts.filter(product => product.id !== productId)))
+  }
+
   return (
     <CartContext.Provider 
       value={{
         products,
-        addProduct
+        addProduct,
+        removeProduct
       }}
     >
       {children}
