@@ -1,12 +1,11 @@
 import { ReactNode, createContext, useState } from "react";
 
 export interface CartItem {
-  id: string;
-  name: string;
-  imageUrl: string;
-  priceInCents: number;
-  defaultPriceId: string;
-  priceFormatted: string;
+  id: string
+  name: string
+  imageUrl: string
+  priceInCents: number
+  defaultPriceId: string
 }
 
 interface CartContextType {

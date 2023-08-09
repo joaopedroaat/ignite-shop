@@ -3,6 +3,7 @@ import { X } from "@phosphor-icons/react";
 import Image from "next/image";
 
 import { CartContext } from "@/contexts/cartContext";
+import { formatPrice } from "@/utils/formatPrice";
 import { useContext } from "react";
 
 interface ShoppingCartProps {
@@ -34,14 +35,14 @@ export function ShoppingCart({ isVisible, handleVisibilityChange }: ShoppingCart
             </ItemImage>
             <ItemDetails>
               <p>{product.name}</p>
-              <span>{product.priceFormatted}</span>
+              <span>{formatPrice(product.priceInCents)}</span>
               <button onClick={() => handleRemoveProduct(product.id)}>Remover</button>
             </ItemDetails>
           </CartItem>
         )))}
       <footer>
         <small>Quantidade <span>{products.length} itens</span></small>
-        <strong>Valor total <span>{products.reduce((sum, product) => sum + product.priceInCents/100, 0)}</span></strong>
+        <strong>Valor total <span>{formatPrice(products.reduce((sum, product) => sum + product.priceInCents, 0))}</span></strong>
         <button>Finalizar compra</button>
       </footer>
     </ShoppingCartContainer>

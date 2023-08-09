@@ -1,6 +1,7 @@
 import { CartContext } from "@/contexts/cartContext"
 import { stripe } from "@/lib/stripe"
 import { ImageContainer, ProductContainer, ProductDetails } from "@/styles/pages/product"
+import { formatPrice } from "@/utils/formatPrice"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Head from "next/head"
 import Image from "next/image"
@@ -29,7 +30,6 @@ export default function Product({ product }: ProductProps) {
       imageUrl: product.imageUrl,
       priceInCents: product.priceInCents,
       defaultPriceId: product.defaultPriceId,
-      priceFormatted: product.priceFormatted,
     })
   }
 
@@ -77,14 +77,11 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
       product: {
         id: product.id,
         name: product.name,
+        description: product.description,
         imageUrl: product.images[0],
         priceInCents: price.unit_amount,
-        priceFormatted: new Intl.NumberFormat('pt-BR', {
-          style:'currency',
-          currency: 'BRL'
-        }).format(price.unit_amount! / 100),
-        description: product.description,
         defaultPriceId: price.id,
+        priceFormatted: formatPrice(price.unit_amount!),
       }
     },
     revalidate: 60 * 60 * 1, // 1 Hour
