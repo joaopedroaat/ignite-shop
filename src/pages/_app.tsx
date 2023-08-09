@@ -1,4 +1,4 @@
-import { Container, Header } from '@/styles/pages/app'
+import { Container, Header, ShoppingCartButton } from '@/styles/pages/app'
 import { Handbag } from '@phosphor-icons/react'
 import type { AppProps } from 'next/app'
 import Link from 'next/link'
@@ -10,6 +10,7 @@ import { globalStyles } from '@/styles/global'
 globalStyles()
 
 import { ShoppingCart } from '@/components/shoppingCart'
+import { ShoppingCartPopup } from '@/components/shoppingCartPopup'
 import { CartContextProvider } from '@/contexts/cartContext'
 import { useState } from 'react'
 
@@ -26,9 +27,10 @@ export default function App({ Component, pageProps }: AppProps) {
           <Link href='/' prefetch={false} >
             <Image src={logoImg} alt="" />
           </Link>
-          <button onClick={handleShoppingCartButtonClicked}>
+          <ShoppingCartButton onClick={handleShoppingCartButtonClicked}>
             <Handbag size={32} weight='bold' />
-          </button>
+            <ShoppingCartPopup />
+          </ShoppingCartButton>
         </Header>
         <Component {...pageProps} />
         <ShoppingCart isVisible={isShoppingCartVisible} handleVisibilityChange={handleShoppingCartButtonClicked} />

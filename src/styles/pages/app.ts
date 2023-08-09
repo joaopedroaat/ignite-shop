@@ -17,8 +17,9 @@ export const Header = styled('header', {
 
   display: 'flex',
   justifyContent: 'space-between',
+})
 
-  button: {
+export const ShoppingCartButton = styled('button', {
     background: '$gray800',
     maxWidth: 48,
     maxHeight: 48,
@@ -30,5 +31,6 @@ export const Header = styled('header', {
     cursor: 'pointer',
     border: 'none',
     borderRadius: 6,
+    position: 'relative',
   }
-})
+)
