@@ -4,7 +4,8 @@ import Image from "next/image";
 
 import { CartContext } from "@/contexts/cartContext";
 import { formatPrice } from "@/utils/formatPrice";
-import { useContext } from "react";
+import axios from "axios";
+import { useContext, useState } from "react";
 
 interface ShoppingCartProps {
   isVisible: boolean;
@@ -14,12 +15,33 @@ interface ShoppingCartProps {
 export function ShoppingCart({ isVisible, handleVisibilityChange }: ShoppingCartProps) {
   const { products, removeProduct } = useContext(CartContext)
 
+  const [isCreatingCheckout, setIsCreatingCheckout] = useState(false)
+
   const handleCloseButtonClicked = () => {
     handleVisibilityChange()
   }
 
   const handleRemoveProduct = (productId: string) => {
     removeProduct(productId)
+  }
+
+  const handleCheckout = async () => {
+    setIsCreatingCheckout(true)
+
+    try {
+      const response = await axios.post('/api/checkout', {
+        items: products.map(product => product.defaultPriceId)
+      })
+  
+      const { checkoutUrl }: { checkoutUrl: string } = response.data
+  
+      window.location.href = checkoutUrl
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsCreatingCheckout(false)
+    }
+
   }
 
   return isVisible && (
@@ -43,7 +65,7 @@ export function ShoppingCart({ isVisible, handleVisibilityChange }: ShoppingCart
       <footer>
         <small>Quantidade <span>{products.length} itens</span></small>
         <strong>Valor total <span>{formatPrice(products.reduce((sum, product) => sum + product.priceInCents, 0))}</span></strong>
-        <button>Finalizar compra</button>
+        <button onClick={handleCheckout} disabled={!products.length || isCreatingCheckout}>Finalizar compra</button>
       </footer>
     </ShoppingCartContainer>
   )

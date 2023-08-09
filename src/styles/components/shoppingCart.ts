@@ -60,6 +60,11 @@ export const ShoppingCartContainer = styled('div', {
       fontWeight: 'bold',
       fontSize: '$md',
       marginTop: '3.5rem',
+
+      '&:disabled': {
+        opacity: 0.6,
+        cursor: 'not-allowed',
+      }
     }
   }
 })
