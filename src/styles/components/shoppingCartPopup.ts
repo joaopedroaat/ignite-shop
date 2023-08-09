@@ -18,4 +18,7 @@ export const ShoppingCartPopupContainer = styled('span', {
   height: '1.5rem',
   
   color: '$white',
+
+  fontWeight: 'bold',
+  padding: '0.625rem',
 })
