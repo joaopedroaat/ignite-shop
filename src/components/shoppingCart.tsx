@@ -24,11 +24,10 @@ export function ShoppingCart({ isVisible, handleVisibilityChange }: ShoppingCart
   return isVisible && (
     <ShoppingCartContainer>
       <CloseButton onClick={handleCloseButtonClicked}>
-        <X size={32} weight="bold" />
+        <X size={'1.5rem'} weight="bold" />
       </CloseButton>
       <h1>Sacola de compras</h1>
-      {products.length ?
-        products.map((product => (
+      {products.map((product => (
           <CartItem key={product.id}>
             <ItemImage>
               <Image src={product.imageUrl} width={94} height={94} alt="" />
@@ -39,10 +38,7 @@ export function ShoppingCart({ isVisible, handleVisibilityChange }: ShoppingCart
               <button onClick={() => handleRemoveProduct(product.id)}>Remover</button>
             </ItemDetails>
           </CartItem>
-        ))) 
-        :
-        <p>Sua sacola está vazia</p>
-      }
+        )))}
       <footer>
         <small>Quantidade <span>{products.length} itens</span></small>
         <strong>Valor total <span>{products.reduce((sum, product) => sum + product.priceInCents/100, 0)}</span></strong>
