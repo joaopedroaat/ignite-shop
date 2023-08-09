@@ -21,6 +21,46 @@ export const ShoppingCartContainer = styled('div', {
     marginTop: '1.5rem',
     marginBottom: '2rem',
     fontSize: '$lg',
+  },
+
+  footer: {
+    marginTop: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+
+    'small, strong': {
+      display: 'flex',
+      alignItens: 'center',
+      justifyContent: 'space-between',
+    },
+
+    small: {
+      span: {
+        fontSize: '$md',
+      }
+    },
+
+    strong: {
+      marginTop: '0.5rem',
+
+      fontSize: '$md',
+      span: {
+        fontSize: '$xl'
+      }
+    },
+
+    button: {
+      padding: '1.125rem',
+      background: '$green500',
+      textAlignment: 'center',
+      border: 'none',
+      borderRadius: 8,
+      color: '$white',
+      cursor: 'pointer',
+      fontWeight: 'bold',
+      fontSize: '$md',
+      marginTop: '3.5rem',
+    }
   }
 })
 

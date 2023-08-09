@@ -43,6 +43,11 @@ export function ShoppingCart({ isVisible, handleVisibilityChange }: ShoppingCart
         :
         <p>Sua sacola está vazia</p>
       }
+      <footer>
+        <small>Quantidade <span>{products.length} itens</span></small>
+        <strong>Valor total <span>{products.reduce((sum, product) => sum + product.priceInCents/100, 0)}</span></strong>
+        <button>Finalizar compra</button>
+      </footer>
     </ShoppingCartContainer>
   )
 }

@@ -4,8 +4,9 @@ export interface CartItem {
   id: string;
   name: string;
   imageUrl: string;
-  priceFormatted: string;
+  priceInCents: number;
   defaultPriceId: string;
+  priceFormatted: string;
 }
 
 interface CartContextType {

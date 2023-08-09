@@ -9,12 +9,13 @@ import Stripe from "stripe"
 
 interface ProductProps {
   product: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    priceFormatted: string;
-    description: string;
-    defaultPriceId: string;
+    id: string
+    name: string
+    imageUrl: string
+    priceInCents: number
+    priceFormatted: string
+    description: string
+    defaultPriceId: string
   }
 }
 
@@ -26,8 +27,9 @@ export default function Product({ product }: ProductProps) {
       id: product.id,
       name: product.name,
       imageUrl: product.imageUrl,
+      priceInCents: product.priceInCents,
+      defaultPriceId: product.defaultPriceId,
       priceFormatted: product.priceFormatted,
-      defaultPriceId: product.defaultPriceId
     })
   }
 
@@ -76,6 +78,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
         id: product.id,
         name: product.name,
         imageUrl: product.images[0],
+        priceInCents: price.unit_amount,
         priceFormatted: new Intl.NumberFormat('pt-BR', {
           style:'currency',
           currency: 'BRL'
