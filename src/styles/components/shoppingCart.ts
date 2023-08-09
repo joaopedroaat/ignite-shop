@@ -12,9 +12,7 @@ export const ShoppingCartContainer = styled('div', {
 
   display: 'flex',
   flexDirection: 'column',
-
-  '-webkit-box-shadow': '-4px 0px 30px 0px rgba(0,0,0,0.8)',
-  '-moz-box-shadow': '-4px 0px 30px 0px rgba(0,0,0,0.8)',
+  
   boxShadow: '-4px 0px 30px 0px rgba(0,0,0,0.8)',
 
   h1: {

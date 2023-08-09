@@ -10,7 +10,8 @@ export const SuccessContainer = styled('main', {
 
   h1: {
     fontSize: '$2xl',
-    color: '$gray100'
+    color: '$gray100',
+    marginTop: '3rem',
   },
 
   p: {
@@ -36,18 +37,21 @@ export const SuccessContainer = styled('main', {
 })
 
 export const ImageContainer = styled('div', {
-  marginTop: '4rem',
-  width: '100%',
-  maxWidth: 130,
-  height: 145,
-  background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
-  borderRadius: 8,
-  padding: '0.25rem',
   display: 'flex',
-  alignItems: 'center',
   justifyContent: 'center',
+  alignItems: 'center',
 
   img: {
-    objectFit: 'cover'
+    background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
+    
+    objectFit: 'cover',
+
+    borderRadius: '50%',
+
+    boxShadow: '0px 0px 60px 0px rgba(0,0,0,0.8)',
+
+    '&:not(:first-child)': {
+      marginLeft: '-15%'
+    }
   }
 })
