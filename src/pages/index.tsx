@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Stripe from 'stripe'
 
+import { DefaultLayout } from '@/layouts/default'
 import { Handbag } from '@phosphor-icons/react'
 import 'keen-slider/keen-slider.min.css'
 
@@ -30,7 +31,7 @@ export default function Home({ products }: HomeProps) {
   })
 
   return (
-    <>
+    <DefaultLayout>
       <Head>
         <title>Home | Ignite Shop</title>
       </Head>
@@ -58,7 +59,7 @@ export default function Home({ products }: HomeProps) {
           )
         })}
       </HomeContainer>
-    </>
+    </DefaultLayout>
     
   )
 }

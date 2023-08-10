@@ -6,6 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Stripe from "stripe";
 
+import logoImg from '@/assets/logo.svg';
+
 interface SuccessProps {
   customerName: string;
   products: [
@@ -23,6 +25,11 @@ export default function Success({ customerName, products }: SuccessProps) {
         <meta name="robots" content="noindex" />
       </Head>
       <SuccessContainer>
+        <header>
+          <Link href={'/'}>
+            <Image src={logoImg} alt="" />
+          </Link>
+        </header>
         <ImageContainer>
           {products.map(({ imageUrl }) => (
             <Image 

@@ -1,4 +1,5 @@
 import { CartContext } from "@/contexts/cartContext"
+import { DefaultLayout } from "@/layouts/default"
 import { stripe } from "@/lib/stripe"
 import { ImageContainer, ProductContainer, ProductDetails } from "@/styles/pages/product"
 import { formatPrice } from "@/utils/formatPrice"
@@ -34,7 +35,7 @@ export default function Product({ product }: ProductProps) {
   }
 
   return (
-    <>
+    <DefaultLayout>
       <Head>
         <title>{`${product.name} | Ignite Shop`}</title>
       </Head>
@@ -50,7 +51,7 @@ export default function Product({ product }: ProductProps) {
           <button onClick={handleAddProduct}>Colocar na sacola</button>
         </ProductDetails>
       </ProductContainer>
-    </>
+    </DefaultLayout>
   )
 }
 

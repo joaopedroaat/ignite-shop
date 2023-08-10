@@ -8,6 +8,11 @@ export const SuccessContainer = styled('main', {
   margin: '0 auto',
   height: '656',
 
+  header: {
+    marginTop: '3rem',
+    marginBottom: '6.5rem'
+  },
+
   h1: {
     fontSize: '$2xl',
     color: '$gray100',
@@ -32,8 +37,7 @@ export const SuccessContainer = styled('main', {
     '&:hover': {
       color: '$green300'
     }
-
-  }
+  },
 })
 
 export const ImageContainer = styled('div', {
